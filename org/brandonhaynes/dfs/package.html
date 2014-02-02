@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>dfs - Temporal-Iterative Map/Reduce (TIMR) Documentation - org.brandonhaynes.dfs</title>
+          <meta name="description" content="dfs - Temporal - Iterative Map Reduce TIMR Documentation - org.brandonhaynes.dfs" />
+          <meta name="keywords" content="dfs Temporal Iterative Map Reduce TIMR Documentation org.brandonhaynes.dfs" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../index.html';
+            var hash = 'org.brandonhaynes.dfs.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../../lib/package_big.png" />
+        <p id="owner"><a href="../../package.html" class="extype" name="org">org</a>.<a href="../package.html" class="extype" name="org.brandonhaynes">brandonhaynes</a></p>
+        <h1>dfs</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">dfs</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>This package contains convenience methods for interacting with the DFS that underlies a running map/reduce job.</p><p>The currently-operating DFS should be obtained via <a href="DFS$.html#current:org.brandonhaynes.dfs.HDFS" class="extmbr" name="org.brandonhaynes.dfs.DFS#current">org.brandonhaynes.dfs.DFS.current</a>.
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="org.brandonhaynes.dfs"><span>dfs</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.brandonhaynes.dfs.DFS" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="DFSextendsAnyRef"></a>
+      <a id="DFS:DFS"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="DFS.html"><span class="name">DFS</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Trait that exposes the DFS operations necessary for TIMR &amp; Schimmy.</p>
+    </li><li name="org.brandonhaynes.dfs.HDFS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="HDFSextendsDFS"></a>
+      <a id="HDFS:HDFS"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="HDFS.html"><span class="name">HDFS</span></a><span class="result"> extends <a href="DFS.html" class="extype" name="org.brandonhaynes.dfs.DFS">DFS</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Concrete DFS strategy that utilizes the Hadoop DFS for file operations</p>
+    </li><li name="org.brandonhaynes.dfs.MockFileSystem" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MockFileSystemextendsDFS"></a>
+      <a id="MockFileSystem:MockFileSystem"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="MockFileSystem.html"><span class="name">MockFileSystem</span></a><span class="result"> extends <a href="DFS.html" class="extype" name="org.brandonhaynes.dfs.DFS">DFS</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Degenerate DFS strategy for unit testing</p>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="org.brandonhaynes.dfs.CheckpointOutputs" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CheckpointOutputs"></a>
+      <a id="CheckpointOutputs:CheckpointOutputs"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="CheckpointOutputs$.html"><span class="name">CheckpointOutputs</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">A set of implicit helper methods for obtaining pairs from checkpointed DFS files (and uncommitted checkpoints)</p>
+    </li><li name="org.brandonhaynes.dfs.DFS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DFS"></a>
+      <a id="DFS:DFS"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="DFS$.html"><span class="name">DFS</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Exposes a current DFS strategy</p>
+    </li><li name="org.brandonhaynes.dfs.PreviousOutputs" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PreviousOutputs"></a>
+      <a id="PreviousOutputs:PreviousOutputs"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="PreviousOutputs$.html"><span class="name">PreviousOutputs</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">A set of implicit helper methods for obtaining pairs from the outputs of previous steps of an iterative
+map/reduce job.</p>
+    </li><li name="org.brandonhaynes.dfs.UncommittedCheckpointOutput" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UncommittedCheckpointOutput"></a>
+      <a id="UncommittedCheckpointOutput:UncommittedCheckpointOutput"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="UncommittedCheckpointOutput$.html"><span class="name">UncommittedCheckpointOutput</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">A set of implicit helper methods for obtaining pairs from the (not yet) committed result of a checkpoint.</p>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../lib/template.js"></script>
+    </body>
+      </html>

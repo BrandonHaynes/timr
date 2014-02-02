@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>support - Temporal-Iterative Map/Reduce (TIMR) Documentation - org.brandonhaynes.support</title>
+          <meta name="description" content="support - Temporal - Iterative Map Reduce TIMR Documentation - org.brandonhaynes.support" />
+          <meta name="keywords" content="support Temporal Iterative Map Reduce TIMR Documentation org.brandonhaynes.support" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../index.html';
+            var hash = 'org.brandonhaynes.support.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../../lib/package_big.png" />
+        <p id="owner"><a href="../../package.html" class="extype" name="org">org</a>.<a href="../package.html" class="extype" name="org.brandonhaynes">brandonhaynes</a></p>
+        <h1>support</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">support</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>This package contains supporting classes for TIMR functionality, along with utility-oriented implicit conversions.</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="org.brandonhaynes.support"><span>support</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.brandonhaynes.support.ComposableIterativeJob" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ComposableIterativeJob[Key&lt;:org.apache.hadoop.io.Writable,Value&lt;:org.apache.hadoop.io.Writable,Mapper&lt;:org.apache.hadoop.mapreduce.Mapper[Key,Value,Key,Value],Reducer&lt;:org.apache.hadoop.mapreduce.Reducer[Key,Value,Key,Value],Format&lt;:org.apache.hadoop.mapreduce.InputFormat[Key,Value]]extendsIterativeJob[Key,Value,Key,Value,Key,Value,Mapper,Reducer,Format]"></a>
+      <a id="ComposableIterativeJob[Key&lt;:Writable,Value&lt;:Writable,Mapper&lt;:Mapper[Key,Value,Key,Value],Reducer&lt;:Reducer[Key,Value,Key,Value],Format&lt;:InputFormat[Key,Value]]:ComposableIterativeJob[Key,Value,Mapper,Reducer,Format]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ComposableIterativeJob.html"><span class="name">ComposableIterativeJob</span></a><span class="tparams">[<span name="Key">Key &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>, <span name="Value">Value &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>, <span name="Mapper">Mapper &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.Mapper">Mapper</span>[<span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Value">Value</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Value">Value</span>]</span>, <span name="Reducer">Reducer &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.Reducer">Reducer</span>[<span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Value">Value</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Value">Value</span>]</span>, <span name="Format">Format &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.InputFormat">InputFormat</span>[<span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Value">Value</span>]</span>]</span><span class="result"> extends <a href="IterativeJob.html" class="extype" name="org.brandonhaynes.support.IterativeJob">IterativeJob</a>[<span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Value">Value</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Value">Value</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Value">Value</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Mapper">Mapper</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Reducer">Reducer</span>, <span class="extype" name="org.brandonhaynes.support.ComposableIterativeJob.Format">Format</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Represents a composable job that is one step of an iterative map/reduce job, where the key and value types are
+the same across all steps of the job.</p>
+    </li><li name="org.brandonhaynes.support.ComposablePartitionedIterativeJob" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ComposablePartitionedIterativeJob[Key&lt;:org.apache.hadoop.io.Writable,Value&lt;:org.apache.hadoop.io.Writable,Mapper&lt;:org.apache.hadoop.mapreduce.Mapper[Key,Value,Key,Value],Reducer&lt;:org.apache.hadoop.mapreduce.Reducer[Key,Value,Key,Value],Partitioner&lt;:org.apache.hadoop.mapreduce.Partitioner[Key,Value],Format&lt;:org.apache.hadoop.mapreduce.InputFormat[Key,Value]]extendsPartitionedIterativeJob[Key,Value,Key,Value,Key,Value,Mapper,Reducer,Partitioner,Format]"></a>
+      <a id="ComposablePartitionedIterativeJob[Key&lt;:Writable,Value&lt;:Writable,Mapper&lt;:Mapper[Key,Value,Key,Value],Reducer&lt;:Reducer[Key,Value,Key,Value],Partitioner&lt;:Partitioner[Key,Value],Format&lt;:InputFormat[Key,Value]]:ComposablePartitionedIterativeJob[Key,Value,Mapper,Reducer,Partitioner,Format]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ComposablePartitionedIterativeJob.html"><span class="name">ComposablePartitionedIterativeJob</span></a><span class="tparams">[<span name="Key">Key &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>, <span name="Value">Value &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>, <span name="Mapper">Mapper &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.Mapper">Mapper</span>[<span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Value">Value</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Value">Value</span>]</span>, <span name="Reducer">Reducer &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.Reducer">Reducer</span>[<span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Value">Value</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Value">Value</span>]</span>, <span name="Partitioner">Partitioner &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.Partitioner">Partitioner</span>[<span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Value">Value</span>]</span>, <span name="Format">Format &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.InputFormat">InputFormat</span>[<span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Value">Value</span>]</span>]</span><span class="result"> extends <a href="PartitionedIterativeJob.html" class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob">PartitionedIterativeJob</a>[<span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Value">Value</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Value">Value</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Value">Value</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Mapper">Mapper</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Reducer">Reducer</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Partitioner">Partitioner</span>, <span class="extype" name="org.brandonhaynes.support.ComposablePartitionedIterativeJob.Format">Format</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Represents a composable job with (i) a fixed number of reducers, (ii) that is one step of an iterative map/reduce
+process, and (iii) where the key and value types are the same across all steps of the job.</p>
+    </li><li name="org.brandonhaynes.support.Interval" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IntervalextendsRange"></a>
+      <a id="Interval:Interval"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Interval.html"><span class="name">Interval</span></a><span class="result"> extends <span class="extype" name="scala.Range">Range</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Class representing an interval with finite left-bound and potentially infinite right-bound.</p>
+    </li><li name="org.brandonhaynes.support.IterativeJob" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IterativeJob[InputKey&lt;:org.apache.hadoop.io.Writable,InputValue&lt;:org.apache.hadoop.io.Writable,IntermediateKey,IntermediateValue,OutputKey,OutputValue,Mapper&lt;:org.apache.hadoop.mapreduce.Mapper[InputKey,InputValue,IntermediateKey,IntermediateValue],Reducer&lt;:org.apache.hadoop.mapreduce.Reducer[IntermediateKey,IntermediateValue,OutputKey,OutputValue],Format&lt;:org.apache.hadoop.mapreduce.InputFormat[InputKey,InputValue]]extendsJob"></a>
+      <a id="IterativeJob[InputKey&lt;:Writable,InputValue&lt;:Writable,IntermediateKey,IntermediateValue,OutputKey,OutputValue,Mapper&lt;:Mapper[InputKey,InputValue,IntermediateKey,IntermediateValue],Reducer&lt;:Reducer[IntermediateKey,IntermediateValue,OutputKey,OutputValue],Format&lt;:InputFormat[InputKey,InputValue]]:IterativeJob[InputKey,InputValue,IntermediateKey,IntermediateValue,OutputKey,OutputValue,Mapper,Reducer,Format]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="IterativeJob.html"><span class="name">IterativeJob</span></a><span class="tparams">[<span name="InputKey">InputKey &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>, <span name="InputValue">InputValue &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>, <span name="IntermediateKey">IntermediateKey</span>, <span name="IntermediateValue">IntermediateValue</span>, <span name="OutputKey">OutputKey</span>, <span name="OutputValue">OutputValue</span>, <span name="Mapper">Mapper &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.Mapper">Mapper</span>[<span class="extype" name="org.brandonhaynes.support.IterativeJob.InputKey">InputKey</span>, <span class="extype" name="org.brandonhaynes.support.IterativeJob.InputValue">InputValue</span>, <span class="extype" name="org.brandonhaynes.support.IterativeJob.IntermediateKey">IntermediateKey</span>, <span class="extype" name="org.brandonhaynes.support.IterativeJob.IntermediateValue">IntermediateValue</span>]</span>, <span name="Reducer">Reducer &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.Reducer">Reducer</span>[<span class="extype" name="org.brandonhaynes.support.IterativeJob.IntermediateKey">IntermediateKey</span>, <span class="extype" name="org.brandonhaynes.support.IterativeJob.IntermediateValue">IntermediateValue</span>, <span class="extype" name="org.brandonhaynes.support.IterativeJob.OutputKey">OutputKey</span>, <span class="extype" name="org.brandonhaynes.support.IterativeJob.OutputValue">OutputValue</span>]</span>, <span name="Format">Format &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.InputFormat">InputFormat</span>[<span class="extype" name="org.brandonhaynes.support.IterativeJob.InputKey">InputKey</span>, <span class="extype" name="org.brandonhaynes.support.IterativeJob.InputValue">InputValue</span>]</span>]</span><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapreduce.Job">Job</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Represents a job that is one step of an iterative map/reduce job.</p>
+    </li><li name="org.brandonhaynes.support.PartitionedIterativeJob" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PartitionedIterativeJob[InputKey&lt;:org.apache.hadoop.io.Writable,InputValue&lt;:org.apache.hadoop.io.Writable,IntermediateKey,IntermediateValue,OutputKey,OutputValue,Mapper&lt;:org.apache.hadoop.mapreduce.Mapper[InputKey,InputValue,IntermediateKey,IntermediateValue],Reducer&lt;:org.apache.hadoop.mapreduce.Reducer[IntermediateKey,IntermediateValue,OutputKey,OutputValue],Partitioner&lt;:org.apache.hadoop.mapreduce.Partitioner[IntermediateKey,IntermediateValue],Format&lt;:org.apache.hadoop.mapreduce.InputFormat[InputKey,InputValue]]extendsIterativeJob[InputKey,InputValue,IntermediateKey,IntermediateValue,OutputKey,OutputValue,Mapper,Reducer,Format]"></a>
+      <a id="PartitionedIterativeJob[InputKey&lt;:Writable,InputValue&lt;:Writable,IntermediateKey,IntermediateValue,OutputKey,OutputValue,Mapper&lt;:Mapper[InputKey,InputValue,IntermediateKey,IntermediateValue],Reducer&lt;:Reducer[IntermediateKey,IntermediateValue,OutputKey,OutputValue],Partitioner&lt;:Partitioner[IntermediateKey,IntermediateValue],Format&lt;:InputFormat[InputKey,InputValue]]:PartitionedIterativeJob[InputKey,InputValue,IntermediateKey,IntermediateValue,OutputKey,OutputValue,Mapper,Reducer,Partitioner,Format]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="PartitionedIterativeJob.html"><span class="name">PartitionedIterativeJob</span></a><span class="tparams">[<span name="InputKey">InputKey &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>, <span name="InputValue">InputValue &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>, <span name="IntermediateKey">IntermediateKey</span>, <span name="IntermediateValue">IntermediateValue</span>, <span name="OutputKey">OutputKey</span>, <span name="OutputValue">OutputValue</span>, <span name="Mapper">Mapper &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.Mapper">Mapper</span>[<span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.InputKey">InputKey</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.InputValue">InputValue</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.IntermediateKey">IntermediateKey</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.IntermediateValue">IntermediateValue</span>]</span>, <span name="Reducer">Reducer &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.Reducer">Reducer</span>[<span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.IntermediateKey">IntermediateKey</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.IntermediateValue">IntermediateValue</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.OutputKey">OutputKey</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.OutputValue">OutputValue</span>]</span>, <span name="Partitioner">Partitioner &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.Partitioner">Partitioner</span>[<span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.IntermediateKey">IntermediateKey</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.IntermediateValue">IntermediateValue</span>]</span>, <span name="Format">Format &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.InputFormat">InputFormat</span>[<span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.InputKey">InputKey</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.InputValue">InputValue</span>]</span>]</span><span class="result"> extends <a href="IterativeJob.html" class="extype" name="org.brandonhaynes.support.IterativeJob">IterativeJob</a>[<span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.InputKey">InputKey</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.InputValue">InputValue</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.IntermediateKey">IntermediateKey</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.IntermediateValue">IntermediateValue</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.OutputKey">OutputKey</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.OutputValue">OutputValue</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.Mapper">Mapper</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.Reducer">Reducer</span>, <span class="extype" name="org.brandonhaynes.support.PartitionedIterativeJob.Format">Format</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Base class for one step an iterative job that is executed with a fixed number of reducers.</p>
+    </li><li name="org.brandonhaynes.support.TemporalPair" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TemporalPair[A]extendsProductwithSerializable"></a>
+      <a id="TemporalPair[A]:TemporalPair[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="TemporalPair.html"><span class="name">TemporalPair</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="value">value: <span class="extype" name="org.brandonhaynes.support.TemporalPair.A">A</span></span>, <span name="interval">interval: <a href="Interval.html" class="extype" name="org.brandonhaynes.support.Interval">Interval</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Represents a pairing of some value alpha and a valid-interval for that value</p>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="org.brandonhaynes.support.IterativeJob" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IterativeJob"></a>
+      <a id="IterativeJob:IterativeJob"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="IterativeJob$.html"><span class="name">IterativeJob</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Exposes some sane defaults for iterative jobs</p>
+    </li><li name="org.brandonhaynes.support.TemporalPair" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TemporalPair"></a>
+      <a id="TemporalPair:TemporalPair"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="TemporalPair$.html"><span class="name">TemporalPair</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Implicit conversions for temporal pairs</p>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../lib/template.js"></script>
+    </body>
+      </html>

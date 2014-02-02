@@ -1,0 +1,365 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>bfs - Temporal-Iterative Map/Reduce (TIMR) Documentation - org.brandonhaynes.bfs</title>
+          <meta name="description" content="bfs - Temporal - Iterative Map Reduce TIMR Documentation - org.brandonhaynes.bfs" />
+          <meta name="keywords" content="bfs Temporal Iterative Map Reduce TIMR Documentation org.brandonhaynes.bfs" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../index.html';
+            var hash = 'org.brandonhaynes.bfs.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../../lib/package_big.png" />
+        <p id="owner"><a href="../../package.html" class="extype" name="org">org</a>.<a href="../package.html" class="extype" name="org.brandonhaynes">brandonhaynes</a></p>
+        <h1>bfs</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">bfs</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Classes that realize a single-source breadth-first search (SS-BFS) over a graph in adjacency form using one of
+three algorithms:</p><ul><li><a href="NaiveBFS.html" class="extype" name="org.brandonhaynes.bfs.NaiveBFS">org.brandonhaynes.bfs.NaiveBFS</a>: Perform SS-BFS using a naive, straightforward algorithm
+                                         (see Lin &amp; Dyer 2010)</li><li><a href="SchimmyBFS.html" class="extype" name="org.brandonhaynes.bfs.SchimmyBFS">org.brandonhaynes.bfs.SchimmyBFS</a>: Perform SS-BFS using the Schimmy pattern (Lin &amp; Dyer 2010)</li><li><a href="TIMRBFS.html" class="extype" name="org.brandonhaynes.bfs.TIMRBFS">org.brandonhaynes.bfs.TIMRBFS</a>: Perform SS-BFS using temporal-iterative map/reduce (Haynes 2014)</li></ul><p>Input graphs are assumed to be in adjacency form that may be parsed as <a href="VertexMetadata.html" class="extype" name="org.brandonhaynes.bfs.VertexMetadata">org.brandonhaynes.bfs.VertexMetadata</a>.
+For example:</p><pre><span class="num">1000</span>  (<span class="num">0</span>, [<span class="num">1001</span>, <span class="num">1002</span>])
+<span class="num">1001</span>  []
+<span class="num">1002</span>  [<span class="num">1003</span>]
+<span class="num">1003</span>  [<span class="num">1001</span>]</pre><p>Here the distance <code>0</code> associated with vertex 1000 represents the origin of the SS-BFS; all other nodes are assumed
+to have unknown distance.  During each iteration of the iterative process, the search frontier will be expanded
+by one unit (e.g., after two iterations the value associated with vertex 1003 will be <code>(2, [1001])</code>).
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="org.brandonhaynes.bfs"><span>bfs</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.brandonhaynes.bfs.BFSInputFormat" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="BFSInputFormatextendsFileInputFormat[org.brandonhaynes.bfs.VertexId,org.brandonhaynes.bfs.VertexMetadata]"></a>
+      <a id="BFSInputFormat:BFSInputFormat"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="BFSInputFormat.html"><span class="name">BFSInputFormat</span></a><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapreduce.lib.input.FileInputFormat">FileInputFormat</span>[<a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <a href="VertexMetadata.html" class="extype" name="org.brandonhaynes.bfs.VertexMetadata">VertexMetadata</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">An input format for SS-BFS over map/reduce.</p>
+    </li><li name="org.brandonhaynes.bfs.BFSKeyPartitioner" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="BFSKeyPartitionerextendsPartitioner[org.brandonhaynes.bfs.VertexId,org.brandonhaynes.bfs.VertexMetadata]"></a>
+      <a id="BFSKeyPartitioner:BFSKeyPartitioner"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="BFSKeyPartitioner.html"><span class="name">BFSKeyPartitioner</span></a><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapreduce.Partitioner">Partitioner</span>[<a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <a href="VertexMetadata.html" class="extype" name="org.brandonhaynes.bfs.VertexMetadata">VertexMetadata</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Simple key partitioner for SS-BFS over map/reduce.</p>
+    </li><li name="org.brandonhaynes.bfs.BFSTool" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="BFSToolextendsConfiguredwithTool"></a>
+      <a id="BFSTool:BFSTool"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="BFSTool.html"><span class="name">BFSTool</span></a><span class="result"> extends <span class="extype" name="org.apache.hadoop.conf.Configured">Configured</span> with <span class="extype" name="org.apache.hadoop.util.Tool">Tool</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Base class for tools that execute iterative SS-BFS under map/reduce</p>
+    </li><li name="org.brandonhaynes.bfs.NaiveBFS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NaiveBFSextendsBFSTool"></a>
+      <a id="NaiveBFS:NaiveBFS"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NaiveBFS.html"><span class="name">NaiveBFS</span></a><span class="result"> extends <a href="BFSTool.html" class="extype" name="org.brandonhaynes.bfs.BFSTool">BFSTool</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Hadoop Tool for executing a naive BFS over a graph</p>
+    </li><li name="org.brandonhaynes.bfs.NaiveBFSInputFormat" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NaiveBFSInputFormatextendsFileInputFormat[org.brandonhaynes.bfs.VertexId,org.apache.hadoop.io.Text]"></a>
+      <a id="NaiveBFSInputFormat:NaiveBFSInputFormat"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NaiveBFSInputFormat.html"><span class="name">NaiveBFSInputFormat</span></a><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapreduce.lib.input.FileInputFormat">FileInputFormat</span>[<a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <span class="extype" name="org.apache.hadoop.io.Text">Text</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Input format for the naive BFS algorithm</p>
+    </li><li name="org.brandonhaynes.bfs.NaiveBFSMapper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NaiveBFSMapperextendsMapper[org.brandonhaynes.bfs.VertexId,org.apache.hadoop.io.Text,org.brandonhaynes.bfs.VertexId,org.apache.hadoop.io.Text]"></a>
+      <a id="NaiveBFSMapper:NaiveBFSMapper"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NaiveBFSMapper.html"><span class="name">NaiveBFSMapper</span></a><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapreduce.Mapper">Mapper</span>[<a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <span class="extype" name="org.apache.hadoop.io.Text">Text</span>, <a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <span class="extype" name="org.apache.hadoop.io.Text">Text</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">A mapper for ordinary SS-BFS over a graph</p>
+    </li><li name="org.brandonhaynes.bfs.NaiveBFSReducer" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NaiveBFSReducerextendsReducer[org.brandonhaynes.bfs.VertexId,org.apache.hadoop.io.Text,org.brandonhaynes.bfs.VertexId,org.apache.hadoop.io.Text]"></a>
+      <a id="NaiveBFSReducer:NaiveBFSReducer"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NaiveBFSReducer.html"><span class="name">NaiveBFSReducer</span></a><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapreduce.Reducer">Reducer</span>[<a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <span class="extype" name="org.apache.hadoop.io.Text">Text</span>, <a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <span class="extype" name="org.apache.hadoop.io.Text">Text</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Reducer for ordinary BFS</p>
+    </li><li name="org.brandonhaynes.bfs.SchimmyBFS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SchimmyBFSextendsBFSTool"></a>
+      <a id="SchimmyBFS:SchimmyBFS"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="SchimmyBFS.html"><span class="name">SchimmyBFS</span></a><span class="result"> extends <a href="BFSTool.html" class="extype" name="org.brandonhaynes.bfs.BFSTool">BFSTool</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A tool for executing a Schimmy-enabled SS-BFS over an input graph</p>
+    </li><li name="org.brandonhaynes.bfs.SchimmyBFSMapper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SchimmyBFSMapperextendsMapper[org.brandonhaynes.bfs.VertexId,org.brandonhaynes.bfs.VertexMetadata,org.brandonhaynes.bfs.VertexId,org.brandonhaynes.bfs.VertexMetadata]"></a>
+      <a id="SchimmyBFSMapper:SchimmyBFSMapper"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="SchimmyBFSMapper.html"><span class="name">SchimmyBFSMapper</span></a><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapreduce.Mapper">Mapper</span>[<a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <a href="VertexMetadata.html" class="extype" name="org.brandonhaynes.bfs.VertexMetadata">VertexMetadata</a>, <a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <a href="VertexMetadata.html" class="extype" name="org.brandonhaynes.bfs.VertexMetadata">VertexMetadata</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">A mapper for Schimmy-enabled SS-BFS over a graph</p>
+    </li><li name="org.brandonhaynes.bfs.SchimmyBFSReducer" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SchimmyBFSReducerextendsSchimmyReducer[org.brandonhaynes.bfs.VertexId,org.brandonhaynes.bfs.VertexMetadata]"></a>
+      <a id="SchimmyBFSReducer:SchimmyBFSReducer"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="SchimmyBFSReducer.html"><span class="name">SchimmyBFSReducer</span></a><span class="result"> extends <a href="../schimmy/SchimmyReducer.html" class="extype" name="org.brandonhaynes.schimmy.SchimmyReducer">SchimmyReducer</a>[<a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <a href="VertexMetadata.html" class="extype" name="org.brandonhaynes.bfs.VertexMetadata">VertexMetadata</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">A reducer for Schimmy-enabled SS-BFS over a graph</p>
+    </li><li name="org.brandonhaynes.bfs.TIMRBFS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TIMRBFSextendsBFSTool"></a>
+      <a id="TIMRBFS:TIMRBFS"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="TIMRBFS.html"><span class="name">TIMRBFS</span></a><span class="result"> extends <a href="BFSTool.html" class="extype" name="org.brandonhaynes.bfs.BFSTool">BFSTool</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A tool for executing a TIMR-enabled SS-BFS over an input graph</p>
+    </li><li name="org.brandonhaynes.bfs.TIMRBFSMapper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TIMRBFSMapperextendsMapper[org.brandonhaynes.bfs.VertexId,org.brandonhaynes.bfs.VertexMetadata,org.brandonhaynes.bfs.VertexId,org.brandonhaynes.bfs.VertexMetadata]"></a>
+      <a id="TIMRBFSMapper:TIMRBFSMapper"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="TIMRBFSMapper.html"><span class="name">TIMRBFSMapper</span></a><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapreduce.Mapper">Mapper</span>[<a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <a href="VertexMetadata.html" class="extype" name="org.brandonhaynes.bfs.VertexMetadata">VertexMetadata</a>, <a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <a href="VertexMetadata.html" class="extype" name="org.brandonhaynes.bfs.VertexMetadata">VertexMetadata</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">A mapper for TIMR-enabled SS-BFS over a graph</p>
+    </li><li name="org.brandonhaynes.bfs.TIMRBFSReducer" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TIMRBFSReducerextendsCheckpointTIMRReducer[org.brandonhaynes.bfs.VertexId,org.brandonhaynes.bfs.VertexMetadata]"></a>
+      <a id="TIMRBFSReducer:TIMRBFSReducer"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="TIMRBFSReducer.html"><span class="name">TIMRBFSReducer</span></a><span class="result"> extends <a href="../timr/checkpoints/CheckpointTIMRReducer.html" class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRReducer">CheckpointTIMRReducer</a>[<a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>, <a href="VertexMetadata.html" class="extype" name="org.brandonhaynes.bfs.VertexMetadata">VertexMetadata</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">A reducer for TIMR-enabled SS-BFS over a graph</p>
+    </li><li name="org.brandonhaynes.bfs.VertexId" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="VertexIdextendsWritableComparable[org.brandonhaynes.bfs.VertexId]"></a>
+      <a id="VertexId:VertexId"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="VertexId.html"><span class="name">VertexId</span></a><span class="result"> extends <span class="extype" name="org.apache.hadoop.io.WritableComparable">WritableComparable</span>[<a href="VertexId.html" class="extype" name="org.brandonhaynes.bfs.VertexId">VertexId</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Class that represents a vertex identifier, suitable for map/reduce graph algorithms.</p>
+    </li><li name="org.brandonhaynes.bfs.VertexMetadata" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="VertexMetadataextendsWritable"></a>
+      <a id="VertexMetadata:VertexMetadata"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="VertexMetadata.html"><span class="name">VertexMetadata</span></a><span class="result"> extends <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Class that represents the metadata associated with a vertex for use under SS-BFS.</p>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="org.brandonhaynes.bfs.BFS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="BFS"></a>
+      <a id="BFS:BFS"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="BFS$.html"><span class="name">BFS</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Implementation for SS-BFS under map/reduce, allowing specification of a concrete algorithm</p>
+    </li><li name="org.brandonhaynes.bfs.Vertex" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Vertex"></a>
+      <a id="Vertex:Vertex"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Vertex$.html"><span class="name">Vertex</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Implicit helpers useful for converting primitives into graph-compatible entities (ids and metadata)</p>
+    </li><li name="org.brandonhaynes.bfs.VertexMetadata" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="VertexMetadata"></a>
+      <a id="VertexMetadata:VertexMetadata"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="VertexMetadata$.html"><span class="name">VertexMetadata</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Utility object for parsing strings as vertices</p>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../lib/template.js"></script>
+    </body>
+      </html>

@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>checkpoints - Temporal-Iterative Map/Reduce (TIMR) Documentation - org.brandonhaynes.timr.checkpoints</title>
+          <meta name="description" content="checkpoints - Temporal - Iterative Map Reduce TIMR Documentation - org.brandonhaynes.timr.checkpoints" />
+          <meta name="keywords" content="checkpoints Temporal Iterative Map Reduce TIMR Documentation org.brandonhaynes.timr.checkpoints" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../../index.html';
+            var hash = 'org.brandonhaynes.timr.checkpoints.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../../../lib/package_big.png" />
+        <p id="owner"><a href="../../../package.html" class="extype" name="org">org</a>.<a href="../../package.html" class="extype" name="org.brandonhaynes">brandonhaynes</a>.<a href="../package.html" class="extype" name="org.brandonhaynes.timr">timr</a></p>
+        <h1>checkpoints</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkpoints</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>This package contains support for checkpointing long-running TIMR jobs.  Because the cost of merging the outputs
+of previous steps is (in part) related to the number of iterations, it is useful to periodically summarize
+the sequence of values associated with each key and commit these merged results to a checkpoint file.</p><p>The <a href="CheckpointTIMRReducer.html" class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRReducer">org.brandonhaynes.timr.checkpoints.CheckpointTIMRReducer</a> performs this checkpoint merging automatically
+via a checkpointing strategy (see <a href="CheckpointMethod.html" class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointMethod">org.brandonhaynes.timr.checkpoints.CheckpointMethod</a>) specified by a developer.
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="org.brandonhaynes.timr.checkpoints"><span>checkpoints</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.brandonhaynes.timr.checkpoints.CheckpointMethod" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CheckpointMethod[InputKey,InputValue,OutputKey,OutputValue]extendsAnyRef"></a>
+      <a id="CheckpointMethod[InputKey,InputValue,OutputKey,OutputValue]:CheckpointMethod[InputKey,InputValue,OutputKey,OutputValue]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="CheckpointMethod.html"><span class="name">CheckpointMethod</span></a><span class="tparams">[<span name="InputKey">InputKey</span>, <span name="InputValue">InputValue</span>, <span name="OutputKey">OutputKey</span>, <span name="OutputValue">OutputValue</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Trait for a checkpoint strategy, which is utilized during an &quot;active checkpoint step&quot; (as identified by the
+isActiveStep function).</p>
+    </li><li name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CheckpointTIMRJob[Key&lt;:org.apache.hadoop.io.Writable,Value&lt;:org.apache.hadoop.io.Writable,Mapper&lt;:org.apache.hadoop.mapreduce.Mapper[Key,Value,Key,Value],Reducer&lt;:org.brandonhaynes.timr.TIMRReducer[Key,Value],Partitioner&lt;:org.apache.hadoop.mapreduce.Partitioner[Key,Value],Format&lt;:org.apache.hadoop.mapreduce.InputFormat[Key,Value]]extendsTIMRJob[Key,Value,Mapper,Reducer,Partitioner,Format]"></a>
+      <a id="CheckpointTIMRJob[Key&lt;:Writable,Value&lt;:Writable,Mapper&lt;:Mapper[Key,Value,Key,Value],Reducer&lt;:TIMRReducer[Key,Value],Partitioner&lt;:Partitioner[Key,Value],Format&lt;:InputFormat[Key,Value]]:CheckpointTIMRJob[Key,Value,Mapper,Reducer,Partitioner,Format]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CheckpointTIMRJob.html"><span class="name">CheckpointTIMRJob</span></a><span class="tparams">[<span name="Key">Key &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>, <span name="Value">Value &lt;: <span class="extype" name="org.apache.hadoop.io.Writable">Writable</span></span>, <span name="Mapper">Mapper &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.Mapper">Mapper</span>[<span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Value">Value</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Value">Value</span>]</span>, <span name="Reducer">Reducer &lt;: <a href="../TIMRReducer.html" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Value">Value</span>]</span>, <span name="Partitioner">Partitioner &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.Partitioner">Partitioner</span>[<span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Value">Value</span>]</span>, <span name="Format">Format &lt;: <span class="extype" name="org.apache.hadoop.mapreduce.InputFormat">InputFormat</span>[<span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Value">Value</span>]</span>]</span><span class="result"> extends <a href="../TIMRJob.html" class="extype" name="org.brandonhaynes.timr.TIMRJob">TIMRJob</a>[<span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Value">Value</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Mapper">Mapper</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Reducer">Reducer</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Partitioner">Partitioner</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRJob.Format">Format</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Base class for a checkpointed TIMR-enabled map/reduce job
+</p>
+    </li><li name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRReducer" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CheckpointTIMRReducer[Key,Value]extendsTIMRReducer[Key,Value]"></a>
+      <a id="CheckpointTIMRReducer[Key,Value]:CheckpointTIMRReducer[Key,Value]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CheckpointTIMRReducer.html"><span class="name">CheckpointTIMRReducer</span></a><span class="tparams">[<span name="Key">Key</span>, <span name="Value">Value</span>]</span><span class="result"> extends <a href="../TIMRReducer.html" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRReducer.Value">Value</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">This reducer type extends TIMR reduction by introducing a checkpoint operation, during which the merging of
+prior pairs are summarized and emitted to the DFS.</p>
+    </li><li name="org.brandonhaynes.timr.checkpoints.ConfiguredCheckpoint" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConfiguredCheckpoint[InputKey,InputValue,OutputKey,OutputValue]extendsCheckpointMethod[InputKey,InputValue,OutputKey,OutputValue]"></a>
+      <a id="ConfiguredCheckpoint[InputKey,InputValue,OutputKey,OutputValue]:ConfiguredCheckpoint[InputKey,InputValue,OutputKey,OutputValue]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConfiguredCheckpoint.html"><span class="name">ConfiguredCheckpoint</span></a><span class="tparams">[<span name="InputKey">InputKey</span>, <span name="InputValue">InputValue</span>, <span name="OutputKey">OutputKey</span>, <span name="OutputValue">OutputValue</span>]</span><span class="result"> extends <a href="CheckpointMethod.html" class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointMethod">CheckpointMethod</a>[<span class="extype" name="org.brandonhaynes.timr.checkpoints.ConfiguredCheckpoint.InputKey">InputKey</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.ConfiguredCheckpoint.InputValue">InputValue</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.ConfiguredCheckpoint.OutputKey">OutputKey</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.ConfiguredCheckpoint.OutputValue">OutputValue</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Concrete checkpoint strategy that performs a checkpointing strategy during each of the explicitly-specified steps
+of an iterative job.</p>
+    </li><li name="org.brandonhaynes.timr.checkpoints.ExplicitCheckpoint" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ExplicitCheckpoint[InputKey,InputValue,OutputKey,OutputValue]extendsCheckpointMethod[InputKey,InputValue,OutputKey,OutputValue]"></a>
+      <a id="ExplicitCheckpoint[InputKey,InputValue,OutputKey,OutputValue]:ExplicitCheckpoint[InputKey,InputValue,OutputKey,OutputValue]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ExplicitCheckpoint.html"><span class="name">ExplicitCheckpoint</span></a><span class="tparams">[<span name="InputKey">InputKey</span>, <span name="InputValue">InputValue</span>, <span name="OutputKey">OutputKey</span>, <span name="OutputValue">OutputValue</span>]</span><span class="result"> extends <a href="CheckpointMethod.html" class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointMethod">CheckpointMethod</a>[<span class="extype" name="org.brandonhaynes.timr.checkpoints.ExplicitCheckpoint.InputKey">InputKey</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.ExplicitCheckpoint.InputValue">InputValue</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.ExplicitCheckpoint.OutputKey">OutputKey</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.ExplicitCheckpoint.OutputValue">OutputValue</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Concrete checkpoint strategy that performs a checkpointing strategy during each of the explicitly-specified steps
+of an iterative job.</p>
+    </li><li name="org.brandonhaynes.timr.checkpoints.NeverCheckpoint" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NeverCheckpoint[InputKey,InputValue,OutputKey,OutputValue]extendsCheckpointMethod[InputKey,InputValue,OutputKey,OutputValue]"></a>
+      <a id="NeverCheckpoint[InputKey,InputValue,OutputKey,OutputValue]:NeverCheckpoint[InputKey,InputValue,OutputKey,OutputValue]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NeverCheckpoint.html"><span class="name">NeverCheckpoint</span></a><span class="tparams">[<span name="InputKey">InputKey</span>, <span name="InputValue">InputValue</span>, <span name="OutputKey">OutputKey</span>, <span name="OutputValue">OutputValue</span>]</span><span class="result"> extends <a href="CheckpointMethod.html" class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointMethod">CheckpointMethod</a>[<span class="extype" name="org.brandonhaynes.timr.checkpoints.NeverCheckpoint.InputKey">InputKey</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.NeverCheckpoint.InputValue">InputValue</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.NeverCheckpoint.OutputKey">OutputKey</span>, <span class="extype" name="org.brandonhaynes.timr.checkpoints.NeverCheckpoint.OutputValue">OutputValue</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Degenerate checkpoint strategy that never performs any checkpointing</p>
+    </li></ol>
+            </div>
+
+        
+
+        
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../lib/template.js"></script>
+    </body>
+      </html>

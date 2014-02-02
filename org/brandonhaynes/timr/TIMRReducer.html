@@ -1,0 +1,900 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>TIMRReducer - Temporal-Iterative Map/Reduce (TIMR) Documentation - org.brandonhaynes.timr.TIMRReducer</title>
+          <meta name="description" content="TIMRReducer - Temporal - Iterative Map Reduce TIMR Documentation - org.brandonhaynes.timr.TIMRReducer" />
+          <meta name="keywords" content="TIMRReducer Temporal Iterative Map Reduce TIMR Documentation org.brandonhaynes.timr.TIMRReducer" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../index.html';
+            var hash = 'org.brandonhaynes.timr.TIMRReducer';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="type">
+      <div id="definition">
+        <img src="../../../lib/class_big.png" />
+        <p id="owner"><a href="../../package.html" class="extype" name="org">org</a>.<a href="../package.html" class="extype" name="org.brandonhaynes">brandonhaynes</a>.<a href="package.html" class="extype" name="org.brandonhaynes.timr">timr</a></p>
+        <h1>TIMRReducer</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TIMRReducer</span><span class="tparams">[<span name="Key">Key</span>, <span name="Value">Value</span>]</span><span class="result"> extends <span class="extype" name="org.apache.hadoop.mapreduce.Reducer">Reducer</span>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Base class for a TIMR reducer.  This class handles aggregation of temporal pairs of all previous outputs and the
+result of the intermediate shuffle.  These temporal pairs are presented as key-groups to the abstract temporal
+reduce function, which must be implemented.</p><p>TIMR jobs differ from their ordinary counterparts by allowing, for each key, reduction over the values that were
+output during prior steps of the iterative process.  So, if a reducer output the value v at some prior step of the
+iterative job, it will (i) have access to that value v during all subsequent steps, and (ii) know the precise steps
+during which the value v was emitted.</p><p>In a traditional reduce function, a sequence of values is presented as an argument.  Under a TIMR reducer,
+a sequence of temporal pairs is presented, where each pair contains a value and its associated validity interval.
+This interval may be used to determine which steps the value was &quot;valid&quot; (i.e., not overwritten by some subsequent
+value).</p><p>In addition to the added utility by having access to the previous values associated with a given key throughout
+the iterative process, TIMR increases algorithm performance under some types of iterative jobs.  It does so under
+the temporal normal form (TNF) assumption -- no value will be emitted from a reducer if it is unchanged from the
+most previously-emitted value.  It is important for any developer to observe this invariant to maximize performance.</p><p>By aggregating prior values and assuming TNF, TIMR allows developers to avoid forward-propagating state that is
+needed during subsequent states, and requires the shuffling only of MUTATIONS to values.  Accordingly, for
+concrete implementations that have few mutations relative to the size of the data that must be forward-propagated,
+TIMR may offer a substantial performance benefit.</p><pre><span class="kw">class</span> MyReducer <span class="kw">extends</span> org.brandonhaynes.timr.TIMRReducer[MyKey, MyValue] {
+  <span class="kw">override</span> <span class="kw">def</span> reduce(key:MyKey, values:Iterator[TemporalPair[MyValue]], context:Context) = {
+    ...
+  }
+}
+
+<span class="cmt">// Or ...</span>
+
+<span class="kw">class</span> MyReducer <span class="kw">extends</span> org.brandonhaynes.timr.TIMRReducer[MyKey, MyValue] {
+  <span class="kw">override</span> <span class="kw">def</span> reduce(key:MyKey,
+                      previous:Iterator[TemporalPair[MyValue]],
+                      intermediate:Iterator[TemporalPair[MyValue]],
+                      context:Context) = {
+    ...
+  }
+}</pre></div><dl class="paramcmts block"><dt class="tparam">Key</dt><dd class="cmt"><p>The key being reduced over</p></dd><dt class="tparam">Value</dt><dd class="cmt"><p>The value being reduced over
+</p></dd></dl><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="org.apache.hadoop.mapreduce.Reducer">Reducer</span>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div><div class="toggleContainer block">
+          <span class="toggle">Known Subclasses</span>
+          <div class="subClasses hiddenContent"><a href="checkpoints/CheckpointTIMRReducer.html" class="extype" name="org.brandonhaynes.timr.checkpoints.CheckpointTIMRReducer">CheckpointTIMRReducer</a>, <a href="../bfs/TIMRBFSReducer.html" class="extype" name="org.brandonhaynes.bfs.TIMRBFSReducer">TIMRBFSReducer</a></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="org.brandonhaynes.timr.TIMRReducer"><span>TIMRReducer</span></li><li class="in" name="org.apache.hadoop.mapreduce.Reducer"><span>Reducer</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+                <span class="filtertype">Implicitly<br />
+                </span>
+                <ol id="implicits"> <li class="in" name="scala.Predef.any2stringadd" data-hidden="true"><span>by any2stringadd</span></li><li class="in" name="scala.Predef.any2stringfmt" data-hidden="true"><span>by any2stringfmt</span></li><li class="in" name="scala.Predef.any2ArrowAssoc" data-hidden="true"><span>by any2ArrowAssoc</span></li><li class="in" name="scala.Predef.any2Ensuring" data-hidden="true"><span>by any2Ensuring</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="org.brandonhaynes.timr.TIMRReducer#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;()(implicitorder:Ordering[Key]):org.brandonhaynes.timr.TIMRReducer[Key,Value]"></a>
+      <a id="&lt;init&gt;:TIMRReducer[Key,Value]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TIMRReducer</span><span class="params">()</span><span class="params">(<span class="implicit">implicit </span><span name="order">order: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>]</span>)</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">order</dt><dd class="cmt"><p>Total ordering over the domain of keys</p></dd></dl></div>
+    </li></ol>
+            </div>
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.brandonhaynes.timr.TIMRReducer.Context" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Context=org.apache.hadoop.mapreduce.Reducer[Key,Value,Key,Value]#Context"></a>
+      <a id="Context:Context"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Context</span><span class="result"> = <span class="extype" name="org.apache.hadoop.mapreduce.Reducer.Context">apache.hadoop.mapreduce.Reducer.Context</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a> → Reducer</dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
+      <a id="!=(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <a id="##():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Predef.any2stringadd#+" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="+(other:String):String"></a>
+      <a id="+(String):String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $plus" class="implicit">+</span><span class="params">(<span name="other">other: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to
+            <span class="extype" name="scala.runtime.StringAdd">StringAdd</span> performed by method any2stringadd in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>StringAdd</dd></dl></div>
+    </li><li name="scala.Predef.any2ArrowAssoc#-&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="-&gt;[B](y:B):(A,B)"></a>
+      <a id="-&gt;[B](B):(TIMRReducer[Key,Value],B)"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $minus$greater" class="implicit">-&gt;</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="y">y: <span class="extype" name="scala.Predef.ArrowAssoc.-&gt;.B">B</span></span>)</span><span class="result">: (<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>], <span class="extype" name="scala.Predef.ArrowAssoc.-&gt;.B">B</span>)</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to
+            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]] performed by method any2ArrowAssoc in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>ArrowAssoc</dd><dt>Annotations</dt><dd>
+                <span class="name">@inline</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
+      <a id="==(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.apache.hadoop.mapreduce.Reducer.Context" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Context"></a>
+      <a id="Context:Context"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Context</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Reducer</dd></dl></div>
+    </li><li name="org.brandonhaynes.timr.TIMRReducer#aggregationSteps" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="aggregationSteps(context:TIMRReducer.this.Context):scala.collection.immutable.Range.Inclusive"></a>
+      <a id="aggregationSteps(Context):Inclusive"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">aggregationSteps</span><span class="params">(<span name="context">context: <a href="#Context=org.apache.hadoop.mapreduce.Reducer[Key,Value,Key,Value]#Context" class="extmbr" name="org.brandonhaynes.timr.TIMRReducer.Context">Context</a></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.Range.Inclusive">Inclusive</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Partial aggregation, function f in the paper; indicates which prior steps to aggregate</p><div class="fullcomment"><div class="comment cmt"><p>Partial aggregation, function f in the paper; indicates which prior steps to aggregate</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.apache.hadoop.mapreduce.Reducer#cleanup" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="cleanup(x$1:org.apache.hadoop.mapreduce.Reducer[KEYIN,VALUEIN,KEYOUT,VALUEOUT]#Context):Unit"></a>
+      <a id="cleanup(apache.hadoop.mapreduce.Reducer.Context):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">cleanup</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.apache.hadoop.mapreduce.Reducer.Context">apache.hadoop.mapreduce.Reducer.Context</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../apache$hadoop$mapreduce.html" class="extype" name="org.apache.hadoop.mapreduce">org.apache.hadoop.mapreduce</a>] </dd><dt>Definition Classes</dt><dd>Reducer</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.io.IOException]</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.Predef.any2Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ensuring(cond:A=&gt;Boolean,msg:=&gt;Any):A"></a>
+      <a id="ensuring((TIMRReducer[Key,Value])⇒Boolean,⇒Any):TIMRReducer[Key,Value]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: (<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="msg">msg: ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]] performed by method any2Ensuring in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
+    </li><li name="scala.Predef.any2Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ensuring(cond:A=&gt;Boolean):A"></a>
+      <a id="ensuring((TIMRReducer[Key,Value])⇒Boolean):TIMRReducer[Key,Value]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: (<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]] performed by method any2Ensuring in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
+    </li><li name="scala.Predef.any2Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ensuring(cond:Boolean,msg:=&gt;Any):A"></a>
+      <a id="ensuring(Boolean,⇒Any):TIMRReducer[Key,Value]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="msg">msg: ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]] performed by method any2Ensuring in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
+    </li><li name="scala.Predef.any2Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ensuring(cond:Boolean):A"></a>
+      <a id="ensuring(Boolean):TIMRReducer[Key,Value]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]] performed by method any2Ensuring in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
+      <a id="equals(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.Predef.any2stringfmt#formatted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="formatted(fmtstr:String):String"></a>
+      <a id="formatted(String):String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit">formatted</span><span class="params">(<span name="fmtstr">fmtstr: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to
+            <span class="extype" name="scala.runtime.StringFormat">StringFormat</span> performed by method any2stringfmt in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>StringFormat</dd><dt>Annotations</dt><dd>
+                <span class="name">@inline</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <a id="getClass():Class[_]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <a id="hashCode():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="org.brandonhaynes.timr.TIMRReducer#previousStreams" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="previousStreams(context:TIMRReducer.this.Context):Seq[Iterator[(Key,Value)]]"></a>
+      <a id="previousStreams(Context):Seq[Iterator[(Key,Value)]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">previousStreams</span><span class="params">(<span name="context">context: <a href="#Context=org.apache.hadoop.mapreduce.Reducer[Key,Value,Key,Value]#Context" class="extmbr" name="org.brandonhaynes.timr.TIMRReducer.Context">Context</a></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Iterator">Iterator</span>[(<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>)]]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Generate sequence of previous outputs, one for each prior step (except as filtered by the aggregation function)</p><div class="fullcomment"><div class="comment cmt"><p>Generate sequence of previous outputs, one for each prior step (except as filtered by the aggregation function)</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+    </li><li name="org.brandonhaynes.timr.TIMRReducer#reduce" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reduce(key:Key,values:Iterable[Value],context:TIMRReducer.this.Context):Unit"></a>
+      <a id="reduce(Key,Iterable[Value],Context):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">reduce</span><span class="params">(<span name="key">key: <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span></span>, <span name="values">values: <span class="extype" name="java.lang.Iterable">Iterable</span>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]</span>, <span name="context">context: <a href="#Context=org.apache.hadoop.mapreduce.Reducer[Key,Value,Key,Value]#Context" class="extmbr" name="org.brandonhaynes.timr.TIMRReducer.Context">Context</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A final, degenerate implementation for &quot;traditional&quot; reduction, which is instead realized through the other
+reduce overloads.</p><div class="fullcomment"><div class="comment cmt"><p>A final, degenerate implementation for &quot;traditional&quot; reduction, which is instead realized through the other
+reduce overloads. This function is not invoked, and should not be overridden.
+</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a> → Reducer</dd></dl></div>
+    </li><li name="org.brandonhaynes.timr.TIMRReducer#reduce" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reduce(context:TIMRReducer.this.Context):Unit"></a>
+      <a id="reduce(Context):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">reduce</span><span class="params">(<span name="context">context: <a href="#Context=org.apache.hadoop.mapreduce.Reducer[Key,Value,Key,Value]#Context" class="extmbr" name="org.brandonhaynes.timr.TIMRReducer.Context">Context</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The TIMR reducer automatically performs the merging, grouping, and dispatch of the values associated with a key's
+prior and intermediate outputs, and forwards these temporal groups to the subreduce function.</p><div class="fullcomment"><div class="comment cmt"><p>The TIMR reducer automatically performs the merging, grouping, and dispatch of the values associated with a key's
+prior and intermediate outputs, and forwards these temporal groups to the subreduce function.
+</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+    </li><li name="org.brandonhaynes.timr.TIMRReducer#reduce" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reduce(key:Key,previous:Iterator[org.brandonhaynes.support.TemporalPair[Value]],intermediate:Iterator[org.brandonhaynes.support.TemporalPair[Value]],context:TIMRReducer.this.Context):Unit"></a>
+      <a id="reduce(Key,Iterator[TemporalPair[Value]],Iterator[TemporalPair[Value]],Context):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">reduce</span><span class="params">(<span name="key">key: <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span></span>, <span name="previous">previous: <span class="extype" name="scala.Iterator">Iterator</span>[<a href="../support/TemporalPair.html" class="extype" name="org.brandonhaynes.support.TemporalPair">TemporalPair</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]]</span>, <span name="intermediate">intermediate: <span class="extype" name="scala.Iterator">Iterator</span>[<a href="../support/TemporalPair.html" class="extype" name="org.brandonhaynes.support.TemporalPair">TemporalPair</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]]</span>, <span name="context">context: <a href="#Context=org.apache.hadoop.mapreduce.Reducer[Key,Value,Key,Value]#Context" class="extmbr" name="org.brandonhaynes.timr.TIMRReducer.Context">Context</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">This reduce overload allows an algorithm designer to leverage prior and intermediate results separately
+</p><div class="fullcomment"><div class="comment cmt"><p>This reduce overload allows an algorithm designer to leverage prior and intermediate results separately
+</p></div><dl class="paramcmts block"><dt class="param">key</dt><dd class="cmt"><p>Key being reduced over</p></dd><dt class="param">previous</dt><dd class="cmt"><p>Temporal pairs from PRIOR steps</p></dd><dt class="param">intermediate</dt><dd class="cmt"><p>Temporal pairs from CURRENT step</p></dd><dt class="param">context</dt><dd class="cmt"><p>Reducer context
+</p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+    </li><li name="org.brandonhaynes.timr.TIMRReducer#reduce" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reduce(key:Key,values:Iterator[org.brandonhaynes.support.TemporalPair[Value]],context:TIMRReducer.this.Context):Unit"></a>
+      <a id="reduce(Key,Iterator[TemporalPair[Value]],Context):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">reduce</span><span class="params">(<span name="key">key: <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span></span>, <span name="values">values: <span class="extype" name="scala.Iterator">Iterator</span>[<a href="../support/TemporalPair.html" class="extype" name="org.brandonhaynes.support.TemporalPair">TemporalPair</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]]</span>, <span name="context">context: <a href="#Context=org.apache.hadoop.mapreduce.Reducer[Key,Value,Key,Value]#Context" class="extmbr" name="org.brandonhaynes.timr.TIMRReducer.Context">Context</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">One of the two TIMR overloads that should be implemented by an algorithm designer
+This variant presents the prior streams and intermediate result as a single merged sequence</p><div class="fullcomment"><div class="comment cmt"><p>One of the two TIMR overloads that should be implemented by an algorithm designer
+This variant presents the prior streams and intermediate result as a single merged sequence</p><p>If a consumer wishes to differentiate between the prior and current temporal stream, consider overloading
+the alternative overload.
+</p></div><dl class="paramcmts block"><dt class="param">key</dt><dd class="cmt"><p>Key being reduced over</p></dd><dt class="param">values</dt><dd class="cmt"><p>Sequence of temporal pairs (both prior and current)</p></dd><dt class="param">context</dt><dd class="cmt"><p>Reducer context
+</p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+    </li><li name="org.brandonhaynes.timr.TIMRReducer#run" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="run(context:TIMRReducer.this.Context):Unit"></a>
+      <a id="run(Context):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">run</span><span class="params">(<span name="context">context: <a href="#Context=org.apache.hadoop.mapreduce.Reducer[Key,Value,Key,Value]#Context" class="extmbr" name="org.brandonhaynes.timr.TIMRReducer.Context">Context</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The default Hadoop runner invokes the reduce function once per key group.</p><div class="fullcomment"><div class="comment cmt"><p>The default Hadoop runner invokes the reduce function once per key group.  Here we perform the normal setup/cleanup
+operations, and invoke the TIMR-specific reduction function instead of iterating over the intermediates.
+</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a> → Reducer</dd></dl></div>
+    </li><li name="org.apache.hadoop.mapreduce.Reducer#setup" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="setup(x$1:org.apache.hadoop.mapreduce.Reducer[KEYIN,VALUEIN,KEYOUT,VALUEOUT]#Context):Unit"></a>
+      <a id="setup(apache.hadoop.mapreduce.Reducer.Context):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setup</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.apache.hadoop.mapreduce.Reducer.Context">apache.hadoop.mapreduce.Reducer.Context</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../apache$hadoop$mapreduce.html" class="extype" name="org.apache.hadoop.mapreduce">org.apache.hadoop.mapreduce</a>] </dd><dt>Definition Classes</dt><dd>Reducer</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.io.IOException]</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
+      <a id="synchronized[T0](⇒T0):T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <a id="toString():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.Predef.any2ArrowAssoc#→" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="→[B](y:B):(A,B)"></a>
+      <a id="→[B](B):(TIMRReducer[Key,Value],B)"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $u2192" class="implicit">→</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="y">y: <span class="extype" name="scala.Predef.ArrowAssoc.→.B">B</span></span>)</span><span class="result">: (<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>], <span class="extype" name="scala.Predef.ArrowAssoc.→.B">B</span>)</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to
+            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]] performed by method any2ArrowAssoc in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>ArrowAssoc</dd></dl></div>
+    </li></ol>
+            </div>
+
+        <div id="values" class="values members">
+              <h3>Shadowed Implicit Value Members</h3>
+              <ol><li name="scala.Predef.any2stringadd#self" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="self:Any"></a>
+      <a id="self:Any"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit shadowed">self</span><span class="result">: <span class="extype" name="scala.Any">Any</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to
+            <span class="extype" name="scala.runtime.StringAdd">StringAdd</span> performed by method any2stringadd in scala.Predef.
+            
+          </dd><dt class="implicit">Shadowing</dt><dd>This implicitly inherited member is ambiguous. One or more implicitly inherited members have similar signatures, so calling this member may produce an ambiguous implicit conversion compiler error.<br />To access this member you can use a <a href="http://stackoverflow.com/questions/2087250/what-is-the-purpose-of-type-ascription-in-scala" target="_blank">type ascription</a>:<br /><div class="cmt"><pre>(tIMRReducer: StringAdd).self</pre></div></dd><dt>Definition Classes</dt><dd>StringAdd</dd></dl></div>
+    </li><li name="scala.Predef.any2stringfmt#self" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="self:Any"></a>
+      <a id="self:Any"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit shadowed">self</span><span class="result">: <span class="extype" name="scala.Any">Any</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to
+            <span class="extype" name="scala.runtime.StringFormat">StringFormat</span> performed by method any2stringfmt in scala.Predef.
+            
+          </dd><dt class="implicit">Shadowing</dt><dd>This implicitly inherited member is ambiguous. One or more implicitly inherited members have similar signatures, so calling this member may produce an ambiguous implicit conversion compiler error.<br />To access this member you can use a <a href="http://stackoverflow.com/questions/2087250/what-is-the-purpose-of-type-ascription-in-scala" target="_blank">type ascription</a>:<br /><div class="cmt"><pre>(tIMRReducer: StringFormat).self</pre></div></dd><dt>Definition Classes</dt><dd>StringFormat</dd></dl></div>
+    </li></ol>
+            </div>
+
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="scala.Predef.any2ArrowAssoc#x" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="x:A"></a>
+      <a id="x:TIMRReducer[Key,Value]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit shadowed deprecated" title="Deprecated: (Since version 2.10.0) Use leftOfArrow instead">x</span><span class="result">: <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to
+            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]] performed by method any2ArrowAssoc in scala.Predef.
+            
+          </dd><dt class="implicit">Shadowing</dt><dd>This implicitly inherited member is ambiguous. One or more implicitly inherited members have similar signatures, so calling this member may produce an ambiguous implicit conversion compiler error.<br />To access this member you can use a <a href="http://stackoverflow.com/questions/2087250/what-is-the-purpose-of-type-ascription-in-scala" target="_blank">type ascription</a>:<br /><div class="cmt"><pre>(tIMRReducer: ArrowAssoc[TIMRReducer[Key, Value]]).x</pre></div></dd><dt>Definition Classes</dt><dd>ArrowAssoc</dd><dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.10.0)</i> Use <code><u>leftOfArrow<code> instead</code></u></code></p></dd></dl></div>
+    </li><li name="scala.Predef.any2Ensuring#x" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="x:A"></a>
+      <a id="x:TIMRReducer[Key,Value]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit shadowed deprecated" title="Deprecated: (Since version 2.10.0) Use resultOfEnsuring instead">x</span><span class="result">: <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]] performed by method any2Ensuring in scala.Predef.
+            
+          </dd><dt class="implicit">Shadowing</dt><dd>This implicitly inherited member is ambiguous. One or more implicitly inherited members have similar signatures, so calling this member may produce an ambiguous implicit conversion compiler error.<br />To access this member you can use a <a href="http://stackoverflow.com/questions/2087250/what-is-the-purpose-of-type-ascription-in-scala" target="_blank">type ascription</a>:<br /><div class="cmt"><pre>(tIMRReducer: Ensuring[TIMRReducer[Key, Value]]).x</pre></div></dd><dt>Definition Classes</dt><dd>Ensuring</dd><dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.10.0)</i> Use <code><u>resultOfEnsuring<code> instead</code></u></code></p></dd></dl></div>
+    </li></ol>
+            </div>
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="org.apache.hadoop.mapreduce.Reducer">
+              <h3>Inherited from <span class="extype" name="org.apache.hadoop.mapreduce.Reducer">Reducer</span>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]</h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        <div class="conversion" name="scala.Predef.any2stringadd">
+              <h3>Inherited by implicit conversion any2stringadd from
+                <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to <span class="extype" name="scala.runtime.StringAdd">StringAdd</span>
+              </h3>
+            </div><div class="conversion" name="scala.Predef.any2stringfmt">
+              <h3>Inherited by implicit conversion any2stringfmt from
+                <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to <span class="extype" name="scala.runtime.StringFormat">StringFormat</span>
+              </h3>
+            </div><div class="conversion" name="scala.Predef.any2ArrowAssoc">
+              <h3>Inherited by implicit conversion any2ArrowAssoc from
+                <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]]
+              </h3>
+            </div><div class="conversion" name="scala.Predef.any2Ensuring">
+              <h3>Inherited by implicit conversion any2Ensuring from
+                <a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>] to <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="org.brandonhaynes.timr.TIMRReducer">TIMRReducer</a>[<span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Key">Key</span>, <span class="extype" name="org.brandonhaynes.timr.TIMRReducer.Value">Value</span>]]
+              </h3>
+            </div>
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../lib/template.js"></script>
+    </body>
+      </html>
