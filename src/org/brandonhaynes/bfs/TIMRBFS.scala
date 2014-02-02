@@ -12,6 +12,7 @@ import Implicits._
 /** A tool for executing a TIMR-enabled SS-BFS over an input graph
   *
   * Sample command line:
+  * {{{
   * hadoop jar SS-BFS.jar -input hdfs:///myGraph
   *                       -D localOutputPath=file:///aLocalPath
   *                       -D verbose=true
@@ -19,6 +20,7 @@ import Implicits._
   *                       -D steps=3
   *                       -D checkpoints=10,15
   *                       -D algorithm=timr
+  * }}}
   *
   * Note that a comma-separated list of checkpoint steps may be (optionally) specified, during with previous
   * pairs are rolled up and aggregated on the DFS for performance purposes.  This limits the cost of jobs with

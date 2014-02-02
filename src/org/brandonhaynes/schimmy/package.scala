@@ -1,12 +1,4 @@
 package org.brandonhaynes
 
-/**
- * Created with IntelliJ IDEA.
- * User: brandon
- * Date: 2/2/14
- * Time: 12:01 PM
- * To change this template use File | Settings | File Templates.
- */
-package object schimmy {
-
-}
+/** This package contains support for executing iterative map/reduce jobs under the Schimmy pattern (Lin & Dyer, 2010)*/
+package object schimmy { }

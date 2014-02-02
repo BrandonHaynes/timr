@@ -11,12 +11,14 @@ import Implicits._
 /** A tool for executing a Schimmy-enabled SS-BFS over an input graph
   *
   * Sample command line:
+  * {{{
   * hadoop jar SS-BFS.jar -input hdfs:///myGraph
   *                       -D localOutputPath=file:///aLocalPath
   *                       -D verbose=true
   *                       -D partitions=2
   *                       -D steps=3
   *                       -D algorithm=schimmy
+  * }}}
   */
 class SchimmyBFS extends BFSTool {
   /** Create a new SS-BFS Schimmy-enabled job */

@@ -8,5 +8,5 @@ object TemporalPair {
   implicit def temporalPairToTuple[A](temporalPair:TemporalPair[A]) = (temporalPair.value, temporalPair.interval)
 }
 
-/* Represents a pairing of some value alpha and a valid-interval for that value */
+/** Represents a pairing of some value alpha and a valid-interval for that value */
 case class TemporalPair[A](value:A, interval:Interval)
