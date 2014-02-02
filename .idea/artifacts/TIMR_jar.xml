@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TIMR:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TIMR_jar</output-path>
+    <root id="archive" name="Schimmy.jar">
+      <element id="module-output" name="TIMR" />
+      <element id="library" level="project" name="commons-cli" />
+      <element id="library" level="project" name="api" />
+      <element id="extracted-dir" path="/usr/local/hadoop/hadoop-core-1.0.3.jar" path-in-jar="/" />
+      <element id="library" level="project" name="commons-logging" />
+      <element id="library" level="project" name="scala-library" />
+      <element id="library" level="project" name="scala-compiler" />
+      <element id="extracted-dir" path="/usr/share/scala/lib/scala-library.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

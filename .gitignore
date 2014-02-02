@@ -1,0 +1,10 @@
+# Java class files
+*.class
+
+# generated files
+out/
+
+# Intellij project files
+*.iws
+.idea/workspace.xml
+.idea/tasks.xml
