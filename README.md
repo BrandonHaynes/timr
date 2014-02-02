@@ -1,6 +1,6 @@
 # Temporal-Iterative Map/Reduce (TIMR)
 
-### Temporal-Iterative Map/Reduce Framework for temporal reduction under iterative Hadoop jobs
+### Temporal-Iterative Map/Reduce Framework for temporal reduction under iterative Hadoop jobs [documentation](http://brandonhaynes.github.io/timr/#org.brandonhaynes.bfs.VertexMetadata)
 
 This library contains support for temporal-iterative map/reduce (TIMR; Haynes 2014), along with an implementation
 for the Schimmmy pattern (Lin & Dyer 2010) under iterative map/reduce.  Developers who wish to leverage TIMR
